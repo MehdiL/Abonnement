@@ -1,9 +1,9 @@
 {
   "development": {
     "dialect": "postgres",
-    "username": "admin",
-    "password": "adminprojet",
-    "database": "archerie",
+    "username": "postgres",
+    "password": "postgres",
+    "database": "abonnement",
     "host": "localhost",
     "pool": {
       "max": 5,

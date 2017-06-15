@@ -21,6 +21,15 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+//Création automatique des tables par sequelize
+models.sequelize.sync().then(
+    models.User.findOrCreate ({where :{
+        nom: "loisel",
+        prenom: "mehdi",
+        login: "admin",
+        password: "admin",
+        isadmin: true}
+    }));
 /**
  * Listen on provided port, on all network interfaces.
  */
