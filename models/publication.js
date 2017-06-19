@@ -7,13 +7,13 @@ module.exports = function(sequelize, DataTypes) {
         photo: DataTypes.STRING,
         nbnum : DataTypes.INTEGER,
         description : DataTypes.TEXT
-    }, {
-        classMethods: {
-            associate: function(models) {
-                //les has many
-            }
-        }
     });
+
+    Publication.associate = function(models) {
+        //les has many
+        Publication.hasMany(models.Abonnement);
+
+    }
 
     return Publication;
 };

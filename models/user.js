@@ -6,14 +6,18 @@ module.exports = function(sequelize, DataTypes) {
         prenom: DataTypes.STRING,
         login: {type:DataTypes.STRING,unique: 'compositeIndex'},
         password: DataTypes.STRING,
-        isadmin: DataTypes.BOOLEAN
-    }, {
-        classMethods: {
-            associate: function(models) {
-                //les has many
-            }
-        }
+        isadmin : DataTypes.BOOLEAN
+
     });
+
+    User.associate = function(models) {
+        //les has many
+        User.hasMany(models.Historique);
+        User.hasMany(models.Remboursement);
+
+    }
+
+
 
     return User;
 };

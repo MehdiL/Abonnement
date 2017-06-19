@@ -5,13 +5,15 @@ module.exports = function(sequelize, DataTypes) {
         debut : DataTypes.DATE,
         actif : DataTypes.BOOLEAN,
         dernierdebut : DataTypes.DATE
-    }, {
-        classMethods: {
-            associate: function(models) {
-                //les has many
-            }
-        }
     });
+
+    Abonnement.associate = function(models) {
+        //les has many
+        Abonnement.hasOne(models.Paiement);
+
+
+    }
+
 
     return Abonnement;
 };

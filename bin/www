@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('abonnement:server');
 var http = require('http');
-
+var models = require('../models');
 /**
  * Get port from environment and store in Express.
  */
@@ -22,14 +22,15 @@ app.set('port', port);
 var server = http.createServer(app);
 
 //Création automatique des tables par sequelize
-models.sequelize.sync().then(
-    models.User.findOrCreate ({where :{
-        nom: "loisel",
-        prenom: "mehdi",
-        login: "admin",
-        password: "admin",
-        isadmin: true}
-    }));
+models.sequelize.sync();
+// .then(
+//     models.User.findOrCreate ({where :{
+//         nom: "loisel",
+//         prenom: "mehdi",
+//         login: "admin",
+//         password: "admin",
+//         isadmin: true}
+//     }))
 /**
  * Listen on provided port, on all network interfaces.
  */

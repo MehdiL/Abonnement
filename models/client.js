@@ -14,13 +14,15 @@ module.exports = function(sequelize, DataTypes) {
         ville : DataTypes.STRING,
         tel : DataTypes.INTEGER,
         remember : DataTypes.BOOLEAN
-    }, {
-        classMethods: {
-            associate: function(models) {
-                //les has many
-            }
-        }
     });
+
+    Client.associate = function(models) {
+        //les has many
+        Client.hasMany(models.Abonnement);
+        Client.hasMany(models.Historique);
+
+    }
+
 
     return Client;
 };
