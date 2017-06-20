@@ -57,21 +57,59 @@ router.post('/publication',isLoggedIn,function (req,res) {
                 prix : newpub.prix,
                 photo : nomfinal
             })
-            publication.save();
+            publication.save().then(function (publication) {
+                res.status(200);
+                res.redirect('publication/:'+publication.id)
+            });
 
         });
 
 
     }
-
-
-
-
-
-
 });
 
 router.put('/publication',function (req,res,next) {
+    var newpub  = req.body;
+    publication.findById(req.body.id).then(function (publication) {
+        if(req.files){
+            var fichier = req.files.photo;
+            var nomfinal = Date.now()+'_'+req.user.id;
+
+
+            fichier.mv('public/images/'+nomfinal, function(err) {
+                if(err)
+                    console.log(err);
+
+                publication.titre = newpub.titre;
+                publication.description = newpub.description;
+               publication.prix = newpub.prix;
+               publication.nbnum = newpub.nbnum;
+               publication.photo = nomfinal;
+                publication.save().then(function (publication) {
+                    res.status(200);
+                    res.redirect('publication/:'+publication.id)
+                });
+
+            });
+
+
+        }else
+        {
+
+
+                publication.titre = newpub.titre;
+                publication.description = newpub.description;
+                publication.prix = newpub.prix;
+                publication.nbnum = newpub.nbnum;
+                publication.save().then(function (publication) {
+                    res.status(200);
+                    res.redirect('publication/:'+publication.id)
+                });
+
+
+
+        }
+    })
 
 });
 
