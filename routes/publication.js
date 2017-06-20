@@ -87,7 +87,7 @@ router.put('/publication',function (req,res,next) {
                publication.photo = nomfinal;
                 publication.save().then(function (publication) {
                     res.status(200);
-                    res.redirect('publication/:'+publication.id)
+                    res.redirect('publication/'+publication.id)
                 });
 
             });
