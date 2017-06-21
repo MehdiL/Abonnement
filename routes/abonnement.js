@@ -18,7 +18,8 @@ router.get('/abonnement/:id',isLoggedIn,function (req,res) {
 router.get('abonnements/client/:id',isLoggedIn,function (req,res) {
     abonnement.findAll({
         where :{
-            ClientId : req.params.id
+            ClientId : req.params.id,
+            actif : true
         }
     }).then(function (abonnements) {
         if(!abonnements){
@@ -50,7 +51,7 @@ router.post('abonnement',isLoggedIn,function (res,req) {
 
         var abonnement = abonnement.build({
             debut : Date.now(),
-            actif : truc,
+            actif : true,
             dernierdebu : Date.now(),
             ClientId : newabo.ClientId,
             PublicationId : newabo.PublicationId
@@ -63,6 +64,14 @@ router.post('abonnement',isLoggedIn,function (res,req) {
             res.render('/abonnement/'+abonnement.id,{message : "Abonnement créé."})
         })
     })
+
+})
+router.put('/abonnement/annuler/:id', isLoggedIn,function (req,res) {
+
+   abonnement.findById(req.params.id).then(function (abonnement) {
+
+
+   })
 
 })
 function isLoggedIn(req, res, next) {
